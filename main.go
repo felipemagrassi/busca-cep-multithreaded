@@ -80,6 +80,17 @@ func BuscaCepHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 
+		if address.Street == "" {
+			fmt.Println("Endereço não encontrado no serviço: ", address.Service)
+		} else {
+			fmt.Println("Cep:", address.Cep)
+			fmt.Println("State:", address.State)
+			fmt.Println("City:", address.City)
+			fmt.Println("Neighborhood:", address.Neighborhood)
+			fmt.Println("Street:", address.Street)
+			fmt.Println("Service:", address.Service)
+		}
+
 		json.NewEncoder(w).Encode(address)
 	case <-time.After(1 * time.Second):
 		w.WriteHeader(http.StatusInternalServerError)
